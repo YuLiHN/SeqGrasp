@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script type="text/javascript"
+          src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Grasping a Handful: Sequential Multi-Object Dexterous Grasp Generation</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .button-group {
+      margin-top: 20px;
+    }
+
+    .button-group a {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 5px;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 8px;
+      background-color: #007acc;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-group a:hover {
+      background-color: #005f99;
+    }
+
+    .abstract-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .abstract-text {
+      flex: 1;
+    }
+
+    .abstract-image {
+      flex: 0 0 400px;
+      text-align: center;
+    }
+
+    .abstract-image img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+    }
+
+    @media (max-width: 768px) {
+      .abstract-container {
+        flex-direction: column;
+      }
+      
+      .abstract-image {
+        flex: none;
+      }
+    }
+
+    .scroll-container {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        padding: 10px 0;
+        gap: 15px;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f1f1f1;
+    }
+    
+    .scroll-container::-webkit-scrollbar {
+        height: 8px;
+    }
+    
+    .scroll-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    
+    .scroll-container::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+    
+    .scroll-container::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    
+    .chart-frame {
+        flex: 0 0 auto;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+    
+    h2 {
+        margin-bottom: 15px;
+        color: #333;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="title-container">
+  <div style="text-align: center;">
+    <h1>Grasping a Handful: Sequential Multi-Object Dexterous Grasp Generation</h1>
+    <div class="subtitle" style="color: #ccc; margin: 20px">
+      Haofei Lu<sup>1</sup>, Yifei Dong<sup>1</sup>, Zehang Weng<sup>1</sup>, Florian Pokorny<sup>1</sup>, Jens Lundell<sup>1,2</sup>, and Danica Kragic<sup>1</sup>
+    </div>
+    <sup>1</sup> Robotics, Perception, and Learning (RPL) at KTH, Stockholm, Sweden.
+          <sup>2</sup> Robotics and Autonomous Systems at University of Turku, Turku, Finland. 
+    <div class="subtitle" style="color: #ccc; margin: 20px">
+      IEEE Robotics and Automation Letters, September, 2025
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-group">
+      <a href="https://arxiv.org/abs/2503.22370f" target="_blank">📄 Paper</a>
+      <a href="https://github.com/your-repo" target="_blank">💻 Code</a>
+      <a href="https://huggingface.co/datasets/YuLLi/SeqGrasp" target="_blank">📊 Dataset</a>
+      <a href="https://www.youtube.com/embed/zrqNjEAN-zg">🎥 Video</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section" id="Abstract">
+    <h2>Abstract</h2>
+    <div class="abstract-container">
+      <div class="abstract-text">
+        <p>
+          We introduce the sequential multi-object robotic grasp sampling algorithm SeqGrasp that can robustly synthesize stable grasps on diverse objects using the robotic hand's partial Degrees of Freedom (DoF). We use SeqGrasp to construct the large-scale Allegro Hand sequential grasping dataset SeqDataset and use it for training the diffusion-based sequential grasp generator SeqDiffuser. We experimentally evaluate SeqGrasp and SeqDiffuser against the state-of-the-art non-sequential multi-object grasp generation method MultiGrasp in simulation and on a real robot. The experimental results demonstrate that SeqGrasp and SeqDiffuser reach an 8.71%-43.33% higher grasp success rate than MultiGrasp. Furthermore, SeqDiffuser is approximately 1000 times faster at generating grasps than SeqGrasp and MultiGrasp. 
+        </p>
+      </div>
+      <div class="abstract-image">
+        <img src="asset/imgs/Teaser.png" alt="Teaser Image">
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="video">
+    <div style="text-align: center;">
+      <iframe width="560" height="315" 
+              src="https://www.youtube.com/embed/zrqNjEAN-zg" 
+              title="Grasping a Handful: Sequential Multi-Object Dexterous Grasp Generation" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <div class="section" id="Results">
+    <h2>Generated Examples</h2>
+    <div id="plotly-div"></div>
+    
+    <div class="scroll-container">
+        <iframe src="asset/html/1.html" width="400" height="400" frameborder="0" class="chart-frame"></iframe>
+        <iframe src="asset/html/5.html" width="400" height="400" frameborder="0" class="chart-frame"></iframe>
+        <iframe src="asset/html/10.html" width="400" height="400" frameborder="0" class="chart-frame"></iframe>
+        <iframe src="asset/html/12.html" width="400" height="400" frameborder="0" class="chart-frame"></iframe>
+    </div>
+  </div>
+
+  <div class="section" id="Additional">
+    <h2>Additional Results</h2>
+    <h1>We performed an ablation study over object size</h1>
+    <div id="plotly-div"></div>
+    <div style="text-align: center;">
+        <img src="asset/imgs/scale_chart.png" alt="Scale Chart" style="width: 70%; height: auto; max-width: 800px;">
+    </div>
+</div>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@misc{lu2025graspinghandfulsequentialmultiobject,
+        title={Grasping a Handful: Sequential Multi-Object Dexterous Grasp Generation}, 
+        author={Haofei Lu and Yifei Dong and Zehang Weng and Florian Pokorny and Jens Lundell and Danica Kragic},
+        year={2025},
+        eprint={2503.22370},
+        archivePrefix={arXiv},
+        primaryClass={cs.RO},
+        url={https://arxiv.org/abs/2503.22370}, 
+  }
+      </code></pre>
+          </div>
+        </section>
+
+  <section class="section" id="Acknowledgements">
+    <div class="container is-max-desktop content">
+      <h2 class="title">Acknowledgements</h2>
+      <p>
+        This work was supported by the Swedish Research Council, the Knut and Alice Wallenberg Foundation, the European Research Council (ERC-BIRD-884807). The authors also would like to express their sincere gratitude to Li Chen for valuable assistance with the experimental hardware and to Ning Zhou for contributing an RTX 3090 graphics card.
+      </p>
+    </div>
+  </section>
+
+  <div class="section" id="contact">
+    <h2>Contact</h2>
+    <div>For questions and comments, please <a href="mailto:haofeil@kth.se">contact us.</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
