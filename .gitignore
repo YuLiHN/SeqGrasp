@@ -1,0 +1,12 @@
+# soft links
+meshdata
+thirdparty
+experiments
+# Caches
+__pycache__
+
+# tmp
+tmp
+
+# sbatch logs
+sbatch
