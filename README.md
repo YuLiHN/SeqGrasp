@@ -10,7 +10,7 @@ object grasp generation method MultiGrasp in simulation and on a real robot. The
 and SeqDiffuser reach an 8.71%-43.33% higher grasp success rate than MultiGrasp. Furthermore, SeqDiffuser is approximately 1000 times faster at generating grasps than SeqGrasp and MultiGrasp. 
 
 
-[Paper] | (https://ieeexplore.ieee.org/abstract/document/11177174)
+[Paper](https://ieeexplore.ieee.org/abstract/document/11177174)
 [ArXiv](https://arxiv.org/abs/2503.22370) |
 [Project](https://yulihn.github.io/SeqGrasp/) |
 [Dataset](https://huggingface.co/datasets/YuLLi/SeqGrasp)
